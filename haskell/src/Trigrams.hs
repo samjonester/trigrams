@@ -1,4 +1,4 @@
-module Trigrams (trigramerate) where
+module Trigrams (trigramerate, consByThree, consBy, lengthIs) where
 
 import Data.Map (Map)
 
@@ -17,4 +17,12 @@ createTrigrams :: Chunks -> [Trigram]
 createTrigrams = undefined
 
 consByThree :: String -> Chunks
-consByThree = undefined
+consByThree = takeWhile (lengthIs 3) . consBy 3 . words
+
+lengthIs :: Int -> [a] -> Bool
+lengthIs l = (== l) . length
+
+consBy :: Int -> [a] -> [[a]]
+consBy _ [] = [[]]
+consBy _ [x] = [[x]]
+consBy size xs@(_:rest) = take size xs : consBy size rest
