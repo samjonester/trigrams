@@ -1,4 +1,4 @@
-module Trigrams (trigramerate, consByThree, createTrigrams, joinTrigrams) where
+module Trigrams (trigramerate) where
 
 import qualified Data.Map as Map
 import Utils.Array (lengthIs,  consBy)
