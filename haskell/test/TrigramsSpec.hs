@@ -3,7 +3,7 @@ module TrigramsSpec (spec) where
 import Test.Hspec
 import Data.Map (Map, fromList)
 
-import Trigrams (trigramerate, consByThree, createTrigrams)
+import Trigrams (trigramerate, consByThree, createTrigrams, joinTrigrams)
 
 spec :: Spec
 spec = do
@@ -18,4 +18,8 @@ spec = do
 
   describe "createTrigrams" $ do
     it "Should make a trigram from an array of three strings" $ do
-      createTrigrams [["a", "b", "c"], ["Foo", "Bar", "Baz"]] `shouldBe` [["a b", "c"], ["Foo Bar", "Baz"]]
+      createTrigrams [["Row", "Row", "Row"], ["Row", "Row", "Your"]] `shouldBe` [("Row Row", ["Row"]), ("Row Row", ["Your"])]
+
+  describe "joinTrigrams" $ do
+    it "Create a map of trigrams by key from a list of trigrams" $ do
+      joinTrigrams [("Row Row", ["Row"]), ("Row Row", ["Your"])] `shouldBe` fromList [("Row Row", ["Row", "Your"])]
