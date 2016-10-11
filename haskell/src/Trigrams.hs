@@ -1,7 +1,7 @@
 module Trigrams (trigramerate) where
 
 import qualified Data.Map as Map
-import Utils.Array (lengthIs,  consBy)
+import Utils.Array (consBy)
 
 type Trigrams = Map.Map String [String]
 type Trigram = (String, [String])
@@ -21,4 +21,4 @@ createTrigrams :: Chunks -> [Trigram]
 createTrigrams = fmap (\(x:y:z) -> (unwords [x, y], z))
 
 consByThree :: String -> Chunks
-consByThree = takeWhile (lengthIs 3) . consBy 3 . words
+consByThree = consBy 3 . words

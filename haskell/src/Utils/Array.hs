@@ -4,6 +4,6 @@ lengthIs :: Int -> [a] -> Bool
 lengthIs l = (== l) . length
 
 consBy :: Int -> [a] -> [[a]]
-consBy _ [] = [[]]
-consBy _ [x] = [[x]]
-consBy size xs@(_:rest) = take size xs : consBy size rest
+consBy size xs@(_:rest)
+  | size >= length xs  = [xs]
+  | otherwise          = take size xs : consBy size rest
